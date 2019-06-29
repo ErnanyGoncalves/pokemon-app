@@ -12,6 +12,7 @@ import { FiltersComponent } from './pokemon-data/filters/filters.component';
 import { PaginationComponent } from './pokemon-data/pagination/pagination.component';
 import { PokemonListComponent } from './pokemon-data/pokemon-list/pokemon-list.component';
 import { PokemonItemComponent } from './pokemon-data/pokemon-list/pokemon-item/pokemon-item.component';
+import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PokemonItemComponent } from './pokemon-data/pokemon-list/pokemon-item/p
     FiltersComponent,
     PaginationComponent,
     PokemonListComponent,
-    PokemonItemComponent
+    PokemonItemComponent,
+    PokemonFormComponent
   ],
   imports: [
     BrowserModule,

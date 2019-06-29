@@ -1,0 +1,98 @@
+<h3>FORM</h3>
+<form>
+  <div class="form-row">
+    <div class="col">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="pokeNumber">Number</label>
+          <input type="number" class="form-control" id="pokeNumber" required>
+        </div>
+        <div class="form-group col">
+          <label for="pokeName">Name</label>
+          <input type="text" class="form-control" id="pokeName" required>
+        </div>
+        <div class="form-group col">
+          <label for="regionName">Region</label>
+          <input type="text" class="form-control" id="regionName" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="imagePath">Image</label>
+          <input type="text" class="form-control" id="imagePath" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col">
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseType">
+            Type(s)
+          </button>
+          <div class="collapse" id="collapseType">
+            <div class="card card-body">
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="isLegendary" value="Legendary"
+                      id="isLegendary">
+                    <label class="form-check-label" for="isLegendary">Legendary</label>
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-row">
+                <div *ngFor="let type of types" class="col-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="type" value="{{type}}" id="{{type}}Type">
+                    <label class="form-check-label" for="type">{{type}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <img style="max-height: 200px" src="https://upload.wikimedia.org/wikipedia/commons/8/8e/RiverIcon2-Empty.svg"
+        alt="Pokémon">
+      <div class="form-group">
+        <label for="pokePreevolutions">Pre Evolution(s)</label>
+        <div class="row">
+          <div class="col">
+            <input type="number" class="form-control" id="pokePreevolutions" placeholder="Pre Evolution Number">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" id="pokePreevolutions" placeholder="Pre Evolution Name">
+          </div>
+          <div class="col">
+            <button class="btn btn-primary">Add</button>
+          </div>
+        </div>
+        <label for="pokeEvolutions">Evolution(s)</label>
+        <div class="row">
+          <div class="col">
+            <input type="number" class="form-control" id="pokeEvolutions" placeholder="Evolution Number">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" id="pokeEvolutions" placeholder="Evolution Name">
+          </div>
+          <div class="col">
+            <button class="btn btn-primary">Add</button>
+          </div>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item"># - préevolução</li>
+          <li class="list-group-item"># - Meu pokémon</li>
+          <li class="list-group-item"># - Evolução</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <button class="btn btn-success">Add</button>
+      <button class="btn btn-warning">Edit</button>
+      <button class="btn btn-info">Cancelar</button>
+    </div>
+  </div>
+</form>
