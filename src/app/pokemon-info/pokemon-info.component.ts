@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pokemon-info',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PokemonInfoComponent implements OnInit {
 
+  @Output() pokemonComponent = new EventEmitter<string>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toComponent(component: string) {
+    this.pokemonComponent.emit(component);
   }
 
 }

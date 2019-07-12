@@ -9,8 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { PokemonDataComponent } from './pokemon-data/pokemon-data.component';
 import { FiltersComponent } from './pokemon-data/filters/filters.component';
 import { PaginationComponent } from './pokemon-data/pagination/pagination.component';
-import { PokemonListComponent } from './pokemon-data/pokemon-list/pokemon-list.component';
-import { PokemonItemComponent } from './pokemon-data/pokemon-list/pokemon-item/pokemon-item.component';
+import { PokemonItemComponent } from './pokemon-data/pokemon-item/pokemon-item.component';
 import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
 
@@ -21,7 +20,6 @@ import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
     PokemonDataComponent,
     FiltersComponent,
     PaginationComponent,
-    PokemonListComponent,
     PokemonItemComponent,
     PokemonFormComponent,
     PokemonInfoComponent

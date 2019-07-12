@@ -111,8 +111,9 @@
   </div>
   <div class="form-row mt-3">
     <div class="col text-center">
-      <button class="btn btn-success mr-1">Register</button>
-      <button class="btn btn-info ml-1">Cancel</button>
+      <button class="btn btn-success mr-1" (click)="toComponent('pokemon-data')">Register</button>
+      <button class="btn btn-warning mr-1" (click)="toComponent('pokemon-data')">Edit</button>
+      <button class="btn btn-info ml-1" (click)="toComponent('pokemon-data')">Cancel</button>
     </div>
   </div>
 </form>

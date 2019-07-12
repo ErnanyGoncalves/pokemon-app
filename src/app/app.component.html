@@ -1,18 +1,10 @@
-<app-header></app-header>
+<app-header (pokemonComponent)="manageComponent($event)"></app-header>
 <div class="container">
     <div class="row">
         <div class="col">
-            <app-pokemon-data></app-pokemon-data>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <app-pokemon-form></app-pokemon-form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <app-pokemon-info></app-pokemon-info>
+            <app-pokemon-data (pokemonComponent)="manageComponent($event)" *ngIf="component === 'pokemon-data'"></app-pokemon-data>
+            <app-pokemon-form (pokemonComponent)="manageComponent($event)" *ngIf="component === 'pokemon-form'"></app-pokemon-form>
+            <app-pokemon-info (pokemonComponent)="manageComponent($event)" *ngIf="component === 'pokemon-info'"></app-pokemon-info>
         </div>
     </div>
 </div>

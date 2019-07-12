@@ -1,13 +1,16 @@
 <div class="row">
-  <div class="col-12 bg-success">
+  <div class="col-12">
     <app-filters></app-filters>
   </div>
-
-  <div class="col-12 bg-danger">
-    <app-pokemon-list></app-pokemon-list>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-3" *ngFor="let pokemonItem of pokemons">
+        <app-pokemon-item (pokemonCpnt)="toComponent($event)" [pokemon]="pokemonItem"></app-pokemon-item>
+        <h1 *ngIf="expression">Oi</h1>
+      </div>
+    </div>
   </div>
-
-  <div class="col-12 bg-warning">
+  <div class="col-12">
     <app-pagination></app-pagination>
   </div>
 </div>
