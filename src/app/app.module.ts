@@ -12,6 +12,8 @@ import { PaginationComponent } from './pokemon-data/pagination/pagination.compon
 import { PokemonItemComponent } from './pokemon-data/pokemon-item/pokemon-item.component';
 import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
+import { HttpPokemonBdService } from './http-pokemon-bd.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,11 @@ import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     NgxPaginationModule,
     Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [HttpPokemonBdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
