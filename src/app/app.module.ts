@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgModule } from '@angular/core';
 
@@ -14,6 +14,14 @@ import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 import { PokemonInfoComponent } from './pokemon-info/pokemon-info.component';
 import { HttpPokemonBdService } from './http-pokemon-bd.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+
+const pokemonRoutes: Routes = [
+  { path: '', component: PokemonDataComponent },
+  { path: 'pokemon/admin', component: PokemonFormComponent },
+  { path: 'pokemon/admin/:number', component: PokemonFormComponent }, //formMode: edit
+  { path: 'pokemon/:number', component: PokemonInfoComponent }
+]
 
 @NgModule({
   declarations: [
@@ -30,8 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
-    Ng2SearchPipeModule
+    // NgxPaginationModule,
+    // Ng2SearchPipeModule,
+    RouterModule.forRoot(pokemonRoutes)
   ],
   providers: [HttpPokemonBdService],
   bootstrap: [AppComponent]

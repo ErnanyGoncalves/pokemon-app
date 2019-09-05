@@ -1,3 +1,6 @@
+<!-- Estudar Formulario Angular - E ver como aproveitar o componente para o cadastro e edicao de pokemon -->
+<!-- Colocar como titulo do lado esquerdo como Register Form ou Editing Form -->
+<!-- Colocar como Preview o titulo do lado direito -->
 <h3 class="text-center">FORM</h3>
 <form>
   <div class="form-row">
@@ -5,21 +8,21 @@
       <div class="form-row">
         <div class="form-group col-2">
           <label for="pokeNumber">Number</label>
-          <input type="number" class="form-control" id="pokeNumber" required>
+          <input type="number" class="form-control" id="pokeNumber" value="{{pokemon.number}}" required>
         </div>
         <div class="form-group col-5">
           <label for="pokeName">Name</label>
-          <input type="text" class="form-control" id="pokeName" required>
+          <input type="text" class="form-control" id="pokeName" value="{{pokemon.name}}" required>
         </div>
         <div class="form-group col-5">
           <label for="regionName">Region</label>
-          <input type="text" class="form-control" id="regionName" required>
+          <input type="text" class="form-control" id="regionName" value="{{pokemon.regionName}}" required>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col">
           <label for="imagePath">Image</label>
-          <input type="text" class="form-control" id="imagePath" required>
+          <input type="text" class="form-control" id="imagePath" value="{{pokemon.imageURL}}" required>
         </div>
       </div>
       <div class="form-row">
@@ -42,7 +45,7 @@
               <div class="form-row">
                 <div *ngFor="let type of types" class="col-2">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="type" value="{{type}}" id="{{type}}Type">
+                    <input class="form-check-input" type="checkbox" name="type" id="type">
                     <label class="form-check-label" for="type">{{type}}</label>
                   </div>
                 </div>
@@ -80,14 +83,21 @@
         </div>
       </div>
     </div>
+    <!-- POR UM TRAÇO DIVIDINDO O FORM E A PRÉVIA!!!!!!!!!!!!!!!! -->
     <div class="ml col">
       <div class="form-row">
+        <!-- Pensar numa forma de escrever dinamicamente e aparecer as informações que estão sendo digitadas ngModel | Ver conflito com os valores do editMode -->
         <div class="text-center col">
+          <h3><span>{{pokemon.number}}</span> {{pokemon.name}}</h3>
+          <img class="text-center" style="max-height: 300px" src="{{pokemon.imageURL}}" alt="Pokémon">
+        </div>
+        <!-- <div class="text-center col">
           <h3><span>###</span> Pokémon</h3>
           <img class="text-center" style="max-height: 300px"
             src="https://upload.wikimedia.org/wikipedia/commons/8/8e/RiverIcon2-Empty.svg" alt="Pokémon">
-        </div>
+        </div> -->
       </div>
+      <!-- Mostra a lista (ordenada) de evoluções (permite excluir as evoluções adicionadas) | Colocar o pokemon do form em destaque -->
       <div class="form-row">
         <div class="col">
           <label>Evolutions</label>
@@ -111,9 +121,12 @@
   </div>
   <div class="form-row mt-3">
     <div class="col text-center">
-      <button class="btn btn-success mr-1" (click)="toComponent('pokemon-data')">Register</button>
-      <button class="btn btn-warning mr-1" (click)="toComponent('pokemon-data')">Edit</button>
-      <button class="btn btn-info ml-1" (click)="toComponent('pokemon-data')">Cancel</button>
+      <!-- Criar método para registrar pokemon e redirecionar para a lista de pokemon (router.navigate) -->
+      <button *ngIf="!isOnEditMode" class="btn btn-success mr-1">Register</button>
+
+      <!-- Criar método para editar pokemon e redirecionar para a lista de pokemon (router.navigate) -->
+      <button *ngIf="isOnEditMode" class="btn btn-warning mr-1">Edit</button>
+      <button class="btn btn-info ml-1" routerLink="/">Cancel</button>
     </div>
   </div>
 </form>

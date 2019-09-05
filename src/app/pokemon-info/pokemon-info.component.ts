@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpPokemonBdService } from '../http-pokemon-bd.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pokemon-info',
@@ -8,21 +9,20 @@ import { HttpPokemonBdService } from '../http-pokemon-bd.service';
 })
 export class PokemonInfoComponent implements OnInit {
 
-  @Output() pokemonComponent = new EventEmitter<string>();
-
   pokemon = {};
-
-  constructor(private reqPokemon: HttpPokemonBdService) { }
+  number: number;
+  constructor(private reqPokemon: HttpPokemonBdService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.reqPokemon.getPokemon(727).subscribe(pokemon=>{
+    this.number = this.route.snapshot.params["number"];
+    this.reqPokemon.getPokemon(this.number).subscribe(pokemon => {
       this.pokemon = pokemon;
       console.log(this.pokemon);
     });
   }
 
-  toComponent(component: string) {
-    this.pokemonComponent.emit(component);
+  toForm() {
+    this.router.navigate(["/pokemon", "admin", this.number], { queryParams: { formMode: 'edit' } });
   }
 
 }

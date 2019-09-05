@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HttpPokemonBdService } from '../http-pokemon-bd.service';
 
 @Component({
   selector: 'app-pokemon-form',
@@ -7,17 +9,24 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class PokemonFormComponent implements OnInit {
 
-  @Output() pokemonComponent = new EventEmitter<string>();
-
   types: string[] = ["Normal", "Fire", "Water", "Grass", "Electric", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dark", "Dragon", "Steel", "Fairy"];
 
-  constructor() { }
+  isOnEditMode: boolean = false;
+
+  pokemon = {};
+
+  constructor(private reqPokemon: HttpPokemonBdService ,private route: ActivatedRoute) { }
 
   ngOnInit() {
-  }
-
-  toComponent(component: string) {
-    this.pokemonComponent.emit(component);
+    if (this.route.snapshot.queryParams.formMode === "edit") { 
+      this.reqPokemon.getPokemon(this.route.snapshot.params.number).subscribe(pokemon => {
+        this.pokemon = pokemon;
+        console.log(this.pokemon);
+      });
+      this.isOnEditMode = true;
+    }else{
+      this.pokemon = {};
+    }
   }
 
 }

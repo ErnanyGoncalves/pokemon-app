@@ -1,5 +1,6 @@
 <div class="card" [ngStyle]="{'border': pokemon.isLegendary?'2px solid gold':'2px solid silver'}">
-  <img (click)="toComponent('pokemon-info')" class="card-img-top img-responsive" src="{{pokemon.imageURL}}" alt="{{pokemon.name}}">
+  <!-- TENTAR MUDAR O ROUTER LINK PASSANDO PARAMETRO PRO CARD (mudar routerLink atual) -->
+  <img routerLink="pokemon/{{pokemon.number}}" class="card-img-top img-responsive" src="{{pokemon.imageURL}}" alt="{{pokemon.name}}">
   <!-- <div class="card-img-overlay text-right">
     <a href="#" class="">Coração</a>
   </div> -->
@@ -10,6 +11,8 @@
     <div class="col-12 text-center">
       <p class="col d-inline" *ngFor="let t of pokemon.type; index as i">{{pokemon.type[i]}}</p>
     </div>
+
+    <!-- DECIDIR SE DEIXA ESSA PARTE NO CARTÃO (PROBABLY NOT) -->
     <!-- <hr>
     <div class="col-12 text-center">
       <p class="col d-inline" *ngIf="pokemon.evolution.length === 0; else evolList">No Evolutions</p>
@@ -18,23 +21,4 @@
       </ng-template>
     </div> -->
   </div>
-  <!-- <img (click)="toComponent('pokemon-info')" class="card-img-top img-responsive" src="{{pokemon.imagePath}}" alt="{{pokemon.pokeName}}">
-  <div class="card-img-overlay text-right">
-    <a href="#" class="">Coração</a>
-  </div>
-  <div class="card-body">
-    <h5 class="text-center card-title"><span>#{{pokemon.pokeNumber}}</span> {{pokemon.pokeName}}
-      ({{pokemon.regionName}})</h5>
-    <hr>
-    <div class="col-12 text-center">
-      <p class="col d-inline" *ngFor="let t of pokemon.type; index as i">{{pokemon.type[i]}}</p>
-    </div>
-    <hr>
-    <div class="col-12 text-center">
-      <p class="col d-inline" *ngIf="pokemon.evolution.length === 0; else evolList">No Evolutions</p>
-      <ng-template #evolList>
-        <p class="col d-inline" *ngFor="let e of pokemon.evolution; index as i">{{pokemon.evolution[i]}}</p>
-      </ng-template>
-    </div>
-  </div> -->
 </div>

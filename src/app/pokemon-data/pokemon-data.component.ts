@@ -9,8 +9,6 @@ import { HttpPokemonBdService } from '../http-pokemon-bd.service';
 })
 export class PokemonDataComponent implements OnInit {
 
-  @Output() pokemonComponent = new EventEmitter<string>();
-
   // pokemons: Pokemon[] = [
   //   new Pokemon(25, "Pikachu", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png", "Kanto", ["Electric"], false, ["Pichu", "Raichu"]),
   //   new Pokemon(244, "Entei", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/244.png", "Johto", ["Fire"], true, []),
@@ -19,7 +17,7 @@ export class PokemonDataComponent implements OnInit {
   //   new Pokemon(244, "Entei", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/244.png", "Johto", ["Fire"], true, []),
   //   new Pokemon(329, "Vibrava", "https://assets.pokemon.com/assets/cms2/img/pokedex/full/329.png", "Rouen", ["Ground", "Dragon"], false, ["Trapinch", "Flygon"]),
   // ]
-  pokemons = {};
+  pokemons = {}; //TENTAR CONVERTER O JSON PRA ARRAY E TENTAR UTILIZAR O MODEL JA CRIADO
 
   constructor(private reqPokemon: HttpPokemonBdService) { }
 
@@ -29,7 +27,4 @@ export class PokemonDataComponent implements OnInit {
     });
   }
 
-  toComponent(component: string) {
-    this.pokemonComponent.emit(component);
-  }
 }

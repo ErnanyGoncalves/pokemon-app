@@ -9,15 +9,10 @@ import { Pokemon } from '../pokemon.model';
 export class PokemonItemComponent implements OnInit {
 
   @Input() pokemon: Pokemon[];
-
-  @Output() pokemonCpnt = new EventEmitter<string>();
-  
+ 
   constructor() { }
 
   ngOnInit() {
   }
 
-  toComponent(component: string) {
-    this.pokemonCpnt.emit(component);
-  }
 }
