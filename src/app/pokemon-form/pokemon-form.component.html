@@ -1,51 +1,54 @@
-<!-- Estudar Formulario Angular - E ver como aproveitar o componente para o cadastro e edicao de pokemon -->
-<!-- Colocar como titulo do lado esquerdo como Register Form ou Editing Form -->
-<!-- Colocar como Preview o titulo do lado direito -->
-<h3 class="text-center">FORM</h3>
-<form>
-  <div class="form-row">
-    <div class="col">
+<form (ngSubmit)="!isOnEditMode ? registerPokemon(pokeForm) : editPokemon(pokeForm)" #pokeForm="ngForm">
+  <div class="form-row mt-3">
+    <!-- Style INLINE - Colocar no SCSS mais tarde/ Mudar cor -->
+    <div class="pr-3 col" style="border-right: 1px solid black">
+      <h3 *ngIf="!isOnEditMode" class="text-center">Register Pokémon</h3>
+      <h3 *ngIf="isOnEditMode" class="text-center">Edit Pokémon</h3>
       <div class="form-row">
         <div class="form-group col-2">
           <label for="pokeNumber">Number</label>
-          <input type="number" class="form-control" id="pokeNumber" value="{{pokemon.number}}" required>
+          <input type="number" class="form-control" id="pokeNumber" value="{{pokemon.number}}"
+            [(ngModel)]="pokemon.number" name="number">
         </div>
         <div class="form-group col-5">
           <label for="pokeName">Name</label>
-          <input type="text" class="form-control" id="pokeName" value="{{pokemon.name}}" required>
+          <input type="text" class="form-control" id="pokeName" value="{{pokemon.name}}" [(ngModel)]="pokemon.name"
+            name="name">
         </div>
         <div class="form-group col-5">
           <label for="regionName">Region</label>
-          <input type="text" class="form-control" id="regionName" value="{{pokemon.regionName}}" required>
+          <input type="text" class="form-control" id="regionName" value="{{pokemon.regionName}}"
+            [(ngModel)]="pokemon.regionName" name="regionName">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col">
           <label for="imagePath">Image</label>
-          <input type="text" class="form-control" id="imagePath" value="{{pokemon.imageURL}}" required>
+          <input type="text" class="form-control" id="imagePath" value="{{pokemon.imageURL}}"
+            [(ngModel)]="pokemon.imageURL" name="imageURL">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group col">
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseType">
-            Type(s)
-          </button>
-          <div class="collapse" id="collapseType">
+          <label for="types">Type(s)</label>
+          <div>
             <div class="card card-body">
               <div class="form-row">
                 <div class="col">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="isLegendary" value="Legendary"
-                      id="isLegendary">
+                      id="isLegendary" [(ngModel)]="pokemon.isLegendary">
                     <label class="form-check-label" for="isLegendary">Legendary</label>
                   </div>
                 </div>
               </div>
               <hr>
+              <!-- ARRUMAR COMO OS TIPOS VÃO SER USADOS/APRESENTADOS PELO FORMULÁRIO NO ANGULAR -->
               <div class="form-row">
-                <div *ngFor="let type of types" class="col-2">
+                <div *ngFor="let type of types;let i = index" class="col-2">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="type" id="type">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="type[i]" name="type"
+                      id="type">
                     <label class="form-check-label" for="type">{{type}}</label>
                   </div>
                 </div>
@@ -54,66 +57,46 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="pokePreevolutions">Pre Evolution(s)</label>
-          <div class="form-row">
-            <div class="col-3">
-              <input type="number" class="form-control" id="pokePreevolutions" placeholder="Number">
-            </div>
-            <div class="col-7">
-              <input type="text" class="form-control" id="pokePreevolutions" placeholder="Name">
-            </div>
-            <div class="pl-5 col-2">
-              <button class="btn btn-primary">Add</button>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
           <label for="pokeEvolutions">Evolution(s)</label>
           <div class="form-row">
             <div class="col-3">
-              <input type="number" class="form-control" id="pokeEvolutions" placeholder="Number">
+              <input type="number" class="form-control" id="pokeEvolutions" [(ngModel)]="evolutionNumber"
+                placeholder="Number" name="evolutionNumber">
             </div>
             <div class="col-7">
-              <input type="text" class="form-control" id="pokeEvolutions" placeholder="Name">
+              <input type="text" class="form-control" id="pokeEvolutions" [(ngModel)]="evolutionName" placeholder="Name"
+                name="evolutionName">
             </div>
             <div class="pl-5 col-2">
-              <button class="btn btn-primary">Add</button>
+              <button (click)="addEvolution({number:evolutionNumber,name:evolutionName})" type="button"
+                class="btn btn-primary">Add</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- POR UM TRAÇO DIVIDINDO O FORM E A PRÉVIA!!!!!!!!!!!!!!!! -->
-    <div class="ml col">
+    <div class="pl-3 col">
+      <h3 class="text-center">Preview</h3>
       <div class="form-row">
-        <!-- Pensar numa forma de escrever dinamicamente e aparecer as informações que estão sendo digitadas ngModel | Ver conflito com os valores do editMode -->
         <div class="text-center col">
-          <h3><span>{{pokemon.number}}</span> {{pokemon.name}}</h3>
+          <h3><span>#{{pokemon.number}}</span> {{pokemon.name}}</h3>
           <img class="text-center" style="max-height: 300px" src="{{pokemon.imageURL}}" alt="Pokémon">
         </div>
-        <!-- <div class="text-center col">
-          <h3><span>###</span> Pokémon</h3>
-          <img class="text-center" style="max-height: 300px"
-            src="https://upload.wikimedia.org/wikipedia/commons/8/8e/RiverIcon2-Empty.svg" alt="Pokémon">
-        </div> -->
       </div>
-      <!-- Mostra a lista (ordenada) de evoluções (permite excluir as evoluções adicionadas) | Colocar o pokemon do form em destaque -->
       <div class="form-row">
         <div class="col">
           <label>Evolutions</label>
           <ul class="list-group">
-            <li class="list-group-item">
+            <li *ngFor="let evolution of evolutions;let i = index" class="list-group-item">
               <div class="form-row">
                 <div class="col-10">
-                  <p class="pt-xl-2 mb-0"><span>###</span> - Pre Evolução</p>
+                  <p class="pt-xl-2 mb-0"><span>#{{evolution.number}}</span> {{evolution.name}}</p>
                 </div>
                 <div class="col-2">
-                  <button class="btn btn-danger">Delete</button>
+                  <button class="btn btn-danger" type="button" (click)="removeEvolution(i)">Delete</button>
                 </div>
               </div>
             </li>
-            <li class="list-group-item"># - Pokémon sendo cadastrado</li>
-            <li class="list-group-item"># - Evolução</li>
           </ul>
         </div>
       </div>
@@ -122,10 +105,10 @@
   <div class="form-row mt-3">
     <div class="col text-center">
       <!-- Criar método para registrar pokemon e redirecionar para a lista de pokemon (router.navigate) -->
-      <button *ngIf="!isOnEditMode" class="btn btn-success mr-1">Register</button>
+      <button *ngIf="!isOnEditMode" class="btn btn-success mr-1" type="submit">Register</button>
 
       <!-- Criar método para editar pokemon e redirecionar para a lista de pokemon (router.navigate) -->
-      <button *ngIf="isOnEditMode" class="btn btn-warning mr-1">Edit</button>
+      <button *ngIf="isOnEditMode" class="btn btn-warning mr-1" type="submit">Edit</button>
       <button class="btn btn-info ml-1" routerLink="/">Cancel</button>
     </div>
   </div>
